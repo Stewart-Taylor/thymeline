@@ -8,6 +8,10 @@
   },
   "author": "Stewart Taylor",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stewart-Taylor/thymeline.git"
+  },
   "dependencies": {
   },
   "devDependencies": {

@@ -6,17 +6,22 @@ const GRAPH_HEIGHT = 170;
 
 const DIVIDER_AMOUNT = 20;
 
+const EVENT_BAR_HEIGHT = 20;
+const EVENT_BAR_STROKE = '#000';
+
 class TimelineGenerator {
   constructor(start, stop, events, startLabel, stopLabel) {
     this.start = start;
     this.stop = stop;
 
+    // Overwrite start of timeline label
     if (startLabel) {
       this.startLabel = startLabel;
     } else {
       this.startLabel = start;
     }
 
+    // Overwrite end timeline label
     if (stopLabel) {
       this.stopLabel = stopLabel;
     } else {
@@ -71,9 +76,7 @@ class TimelineGenerator {
       i = 1;
     }
 
-    let color;
-
-    color = EVENT_COLORS[i - 1];
+    const color = EVENT_COLORS[i - 1];
 
     let xpos = ((event.start - this.start) / (this.stop - this.start)) * this.width;
 
@@ -89,12 +92,15 @@ class TimelineGenerator {
       xpos += 3;
     }
 
-    let bar = `<rect
+    let bar;
+
+    // Base rectangle for the event
+    bar += `<rect
     x="${xpos}"
     y="${ypos}"
     width="${width}"
-    height="20"
-    style="fill:${color};stroke-width:0;stroke:rgb(0,0,0)"
+    height="${EVENT_BAR_HEIGHT}"
+    style="fill:${color};stroke-width:0;stroke:${EVENT_BAR_STROKE}"
     />;
     `;
 
@@ -181,11 +187,6 @@ class TimelineGenerator {
     graph += this.generateBase();
     graph += this.generateStartLabel();
     graph += this.generateStopLabel();
-
-    const event = {
-      start: 10,
-      stop: 50,
-    };
 
     let i = 1;
     this.events.forEach(event => {
