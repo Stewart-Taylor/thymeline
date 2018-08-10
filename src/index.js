@@ -1,11 +1,5 @@
-
-
-
-const EVENT_COLORS = [
-  '#74b9ff',
-  '#00b894',
-  '#ffeaa7'
-]
+const EVENT_COLORS = ['#74b9ff', '#00b894', '#ffeaa7'];
+const BASE_COLOR = '#b2bec3';
 
 const GRAPH_WIDTH = 480;
 const GRAPH_HEIGHT = 170;
@@ -34,10 +28,9 @@ class TimelineGenerator {
     this.events = events;
   }
 
-
   generateBase() {
     const height = GRAPH_HEIGHT;
-    const baseColor = '#b2bec3';
+    const baseColor = BASE_COLOR;
 
     let base = `<rect
       x="0"
@@ -57,13 +50,12 @@ class TimelineGenerator {
       />
       `;
 
-
-    for (let i = 1; i < DIVIDER_AMOUNT ; i++) {
+    for (let i = 1; i < DIVIDER_AMOUNT; i += 1) {
       if (i % 2) {
-      base += `<rect
-        x="${i * (this.width/DIVIDER_AMOUNT)}"
+        base += `<rect
+        x="${i * (this.width / DIVIDER_AMOUNT)}"
         y="0"
-        width="${((this.width/DIVIDER_AMOUNT))}"
+        width="${this.width / DIVIDER_AMOUNT}"
         height="${height}"
         style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
         />
@@ -75,7 +67,6 @@ class TimelineGenerator {
   }
 
   generateEvent(event, i) {
-
     if (!i) {
       i = 1;
     }
@@ -84,9 +75,9 @@ class TimelineGenerator {
 
     color = EVENT_COLORS[i - 1];
 
-    let xpos =  ((event.start-this.start)/(this.stop-this.start)) * this.width;
+    let xpos = ((event.start - this.start) / (this.stop - this.start)) * this.width;
 
-    const xend = ((event.stop-this.start)/(this.stop-this.start)) * this.width;
+    const xend = ((event.stop - this.start) / (this.stop - this.start)) * this.width;
     const width = xend - xpos;
 
     // const xpos = event.start;
@@ -94,11 +85,9 @@ class TimelineGenerator {
 
     const ypos = 40 * i;
 
-
     if (xpos === 0) {
       xpos += 3;
     }
-
 
     let bar = `<rect
     x="${xpos}"
@@ -108,7 +97,6 @@ class TimelineGenerator {
     style="fill:${color};stroke-width:0;stroke:rgb(0,0,0)"
     />;
     `;
-
 
     let startLabel = event.start;
     let stopLabel = event.stop;
@@ -121,16 +109,16 @@ class TimelineGenerator {
       stopLabel = event.stopLabel;
     }
 
-
-
     bar += `
        <text x="${xpos}" y="${ypos - 2}" class="eventlabel">${startLabel}</text>
-       <text x="${xpos + (width - 25)}" y="${ypos - 2}" class="eventlabel">${stopLabel}</text>
+       <text x="${xpos + (width - 25)}" y="${ypos -
+      2}" class="eventlabel">${stopLabel}</text>
     `;
 
     if (event.label) {
       bar += `
-       <text x="${xpos + (width / 2) - (event.label.length * 3)}" y="${ypos + 13}" class="eventinsidelabel">${event.label}</text>
+       <text x="${xpos + width / 2 - event.label.length * 3}" y="${ypos +
+        13}" class="eventinsidelabel">${event.label}</text>
       `;
     }
 
@@ -174,7 +162,6 @@ class TimelineGenerator {
       </style>
     `;
 
-
     style += `
       <defs>
         <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -188,7 +175,6 @@ class TimelineGenerator {
   }
 
   generate() {
-
     let graph = '<svg viewbox="0 0 500 200">';
 
     graph += this.generateStyle();
@@ -196,14 +182,13 @@ class TimelineGenerator {
     graph += this.generateStartLabel();
     graph += this.generateStopLabel();
 
-
     const event = {
       start: 10,
-      stop: 50
-    }
+      stop: 50,
+    };
 
     let i = 1;
-    this.events.forEach((event) => {
+    this.events.forEach(event => {
       graph += this.generateEvent(event, i);
       i += 1;
     });
@@ -212,7 +197,6 @@ class TimelineGenerator {
 
     return graph;
   }
-
 }
 
 module.exports = TimelineGenerator;

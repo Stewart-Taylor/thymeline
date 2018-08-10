@@ -1,1 +1,4 @@
-# timeline-generator
+# ThymeLine
+
+## Overview
+Timeline graph generator
