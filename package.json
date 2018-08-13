@@ -12,6 +12,11 @@
     "type": "git",
     "url": "https://github.com/Stewart-Taylor/thymeline.git"
   },
+  "keywords": [
+    "timeline",
+    "generator",
+    "svg"
+  ],
   "dependencies": {
   },
   "devDependencies": {
