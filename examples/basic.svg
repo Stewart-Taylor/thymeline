@@ -1,0 +1,146 @@
+<svg viewbox="0 0 500 190">
+      <style>
+      .chartlabel {
+        font: bold 13px helvetica;
+        fill: #636e72;
+      }
+
+      .eventlabel {
+        font: bold 10px helvetica;
+        fill: #636e72;
+      }
+
+      .eventinsidelabel {
+        font: bold 10px helvetica;
+        fill: #fff;
+        letter-spacing: 1px;
+      }
+      </style>
+
+      <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:0.3" />
+          <stop offset="100%" style="stop-color:#b2bec3;stop-opacity:1" />
+        </linearGradient>
+      </defs>
+    <rect
+      x="0"
+      y="160"
+      width="480"
+      height="3"
+      style="fill:#636e72;stroke-width:0;stroke:rgb(0,0,0)"
+      />
+      <rect
+      x="0"
+      y="0"
+      width="3"
+      height="160"
+      style="fill:#636e72;stroke-width:0;stroke:rgb(0,0,0)"
+      />
+      <rect
+        x="24"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="72"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="120"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="168"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="216"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="264"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="312"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="360"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="408"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+        <rect
+        x="456"
+        y="0"
+        width="24"
+        height="160"
+        style="fill:#dfe6e969;stroke-width:0;stroke:rgb(0,0,0)"
+        />
+
+      <text x="0" y="180" class="chartlabel">1000</text>
+
+      <text x="450" y="180" class="chartlabel">10000</text>
+    <rect
+    x="10.666666666666668"
+    y="40"
+    width="202.66666666666666"
+    height="20"
+    style="fill:#74b9ff;stroke-width:0;stroke:#000"
+    />;
+
+       <text x="10.666666666666668" y="38" class="eventlabel">11:30</text>
+       <text x="188.33333333333331" y="38" class="eventlabel">10:40</text>
+
+       <text x="97" y="53" class="eventinsidelabel">Label</text>
+      <rect
+    x="213.33333333333331"
+    y="80"
+    width="106.66666666666669"
+    height="20"
+    style="fill:#00b894;stroke-width:0;stroke:#000"
+    />;
+
+       <text x="213.33333333333331" y="78" class="eventlabel">5000</text>
+       <text x="295" y="78" class="eventlabel">7000</text>
+    <rect
+    x="106.66666666666666"
+    y="120"
+    width="320"
+    height="20"
+    style="fill:#ffeaa7;stroke-width:0;stroke:#000"
+    />;
+
+       <text x="106.66666666666666" y="118" class="eventlabel">3000</text>
+       <text x="401.66666666666663" y="118" class="eventlabel">9000</text>
+</svg>

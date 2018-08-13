@@ -1,13 +1,28 @@
-const EVENT_COLORS = ['#74b9ff', '#00b894', '#ffeaa7'];
-const BASE_COLOR = '#b2bec3';
+const BASE_COLOR = '#636e72';
 
 const GRAPH_WIDTH = 480;
 const GRAPH_HEIGHT = 170;
 
+const GRAPH_BOTTOM_PADDING = 30;
+
 const DIVIDER_AMOUNT = 20;
 
 const EVENT_BAR_HEIGHT = 20;
+const EVENT_BAR_SECTION_SIZE = 40;
 const EVENT_BAR_STROKE = '#000';
+
+const EVENT_COLORS = [
+  '#74b9ff',
+  '#00b894',
+  '#ffeaa7',
+  '#fab1a0',
+  '#81ecec',
+  '#55efc4',
+  '#6c5ce7',
+  '#e17055',
+  '#fd79a8',
+  '#6c5ce7',
+];
 
 class TimelineGenerator {
   constructor(start, stop, events, startLabel, stopLabel) {
@@ -34,7 +49,7 @@ class TimelineGenerator {
   }
 
   generateBase() {
-    const height = GRAPH_HEIGHT;
+    const height = this.viewboxHeight - GRAPH_BOTTOM_PADDING;
     const baseColor = BASE_COLOR;
 
     let base = `<rect
@@ -54,6 +69,15 @@ class TimelineGenerator {
       style="fill:${baseColor};stroke-width:0;stroke:rgb(0,0,0)"
       />
       `;
+
+    base += this.generateDividers();
+
+    return base;
+  }
+
+  generateDividers() {
+    const height = this.viewboxHeight - GRAPH_BOTTOM_PADDING;
+    let base = '';
 
     for (let i = 1; i < DIVIDER_AMOUNT; i += 1) {
       if (i % 2) {
@@ -76,7 +100,14 @@ class TimelineGenerator {
       i = 1;
     }
 
-    const color = EVENT_COLORS[i - 1];
+    let color;
+
+    if (i < 10) {
+      color = EVENT_COLORS[i - 1];
+    } else {
+      let c = i % EVENT_COLORS.length;
+      color = EVENT_COLORS[c];
+    }
 
     let xpos = ((event.start - this.start) / (this.stop - this.start)) * this.width;
 
@@ -132,16 +163,18 @@ class TimelineGenerator {
   }
 
   generateStartLabel() {
-    let label = `
-      <text x="0" y="190" class="chartlabel">${this.startLabel}</text>
+    const yPos = this.viewboxHeight - 10;
+    const label = `
+      <text x="0" y="${yPos}" class="chartlabel">${this.startLabel}</text>
     `;
 
     return label;
   }
 
   generateStopLabel() {
-    let label = `
-      <text x="450" y="190" class="chartlabel">${this.stopLabel}</text>
+    const yPos = this.viewboxHeight - 10;
+    const label = `
+      <text x="450" y="${yPos}" class="chartlabel">${this.stopLabel}</text>
     `;
 
     return label;
@@ -181,7 +214,15 @@ class TimelineGenerator {
   }
 
   generate() {
-    let graph = '<svg viewbox="0 0 500 200">';
+    // this.viewboxHeight = 200;
+
+    // if (this.events.length > 3) {
+      // this.viewboxHeight += 50;
+      this.viewboxHeight = EVENT_BAR_SECTION_SIZE * this.events.length;
+    // }
+    this.viewboxHeight += 70;
+
+    let graph = `<svg viewbox="0 0 500 ${this.viewboxHeight}">`;
 
     graph += this.generateStyle();
     graph += this.generateBase();

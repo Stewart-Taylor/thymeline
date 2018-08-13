@@ -13,11 +13,18 @@ const events = [
     stopLabel: 'four',
     label: 'eventlabel',
   },
-  { start: 1000, stop: 2000 },
-  { start: 2000, stop: 3000 },
-  { start: 3000, stop: 4000 },
-  { start: 4000, stop: 5000 },
-  { start: 5000, stop: 6000 },
+  { start: 1200, stop: 2000, label: '2'},
+  { start: 1000, stop: 3000, label: '3'},
+  { start: 3000, stop: 4000, label: '4'},
+  { start: 4000, stop: 5000, label: '5'},
+  { start: 5000, stop: 6000, label: '6'},
+  { start: 5100, stop: 7000, label: '7'},
+  { start: 5400, stop: 8000, label: '8'},
+  { start: 6000, stop: 9000, label: '9'},
+  { start: 5400, stop: 8000, label: '8'},
+  { start: 6000, stop: 9000, label: '9'},
+  { start: 5400, stop: 8000, label: '8'},
+  { start: 6000, stop: 10000, label: '9'},
 ];
 
 const generator = new TimelineGenerator(1000, 10000, events);

@@ -7,11 +7,11 @@ fs.ensureDirSync(OUTPUT_DIR);
 
 const events = [
   {
-    start: 1600,
+    start: 1200,
     stop: 5000,
-    startLabel: 'two',
-    stopLabel: 'four',
-    label: 'eventlabel',
+    startLabel: '11:30',
+    stopLabel: '10:40',
+    label: 'Label',
   },
   {
     start: 5000,
@@ -24,12 +24,12 @@ const events = [
 ];
 
 const generator = new TimelineGenerator(1000, 10000, events);
-let result = generator.generate();
+let graph = generator.generate();
 
-result += `
+graph += `
 <script>
 document.write(
 '<script src="http://' + (location.host || 'localhost').split(':')[0] +
 ':35729/livereload.js?snipver=1"></' + 'script>')</script>`;
 
-fs.writeFileSync(`${OUTPUT_DIR}/output.html`, result);
+fs.writeFileSync(`${OUTPUT_DIR}/output.html`, graph);
