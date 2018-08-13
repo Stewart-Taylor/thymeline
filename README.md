@@ -13,7 +13,7 @@
 ---
 
 
-##Install
+## Install
 
 `npm install thymeline --save`
 
@@ -22,8 +22,8 @@ or
 
 ---
 
-##Quick Guide
-###Basic Usage
+## Quick Guide
+### Basic Usage
 
 ```
 const events = [
@@ -50,4 +50,4 @@ let graph = generator.generate();
 ```
 
 ### Output
-<img src="./examples/basic.svg">
+<img src="./examples/basic.png">
