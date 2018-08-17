@@ -1,6 +1,6 @@
 {
   "name": "thymeline",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Timeline SVG graph generator",
   "main": "src/index.js",
   "scripts": {
@@ -8,6 +8,7 @@
   },
   "author": "Stewart Taylor",
   "license": "MIT",
+  "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stewart-Taylor/thymeline.git"
@@ -15,7 +16,8 @@
   "keywords": [
     "timeline",
     "generator",
-    "svg"
+    "svg",
+    "graph"
   ],
   "dependencies": {
   },

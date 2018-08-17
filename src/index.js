@@ -7,14 +7,13 @@ const GRAPH_BOTTOM_PADDING = 30;
 
 const DIVIDER_AMOUNT = 20;
 
-const EVENT_BAR_HEIGHT = 20;
+const EVENT_BAR_HEIGHT = 10;
 const EVENT_BAR_SECTION_SIZE = 40;
 const EVENT_BAR_STROKE = '#000';
 
 const EVENT_COLORS = [
   '#74b9ff',
   '#00b894',
-  '#ffeaa7',
   '#fab1a0',
   '#81ecec',
   '#55efc4',
@@ -22,6 +21,7 @@ const EVENT_COLORS = [
   '#e17055',
   '#fd79a8',
   '#6c5ce7',
+  '#ffeaa7',
 ];
 
 class TimelineGenerator {
@@ -100,6 +100,12 @@ class TimelineGenerator {
       i = 1;
     }
 
+
+    let isSingleEvent = false;
+    if (event.time) {
+      isSingleEvent = true;
+    }
+
     let color;
 
     if (i < 10) {
@@ -109,7 +115,12 @@ class TimelineGenerator {
       color = EVENT_COLORS[c];
     }
 
-    let xpos = ((event.start - this.start) / (this.stop - this.start)) * this.width;
+    let xpos;
+    if (!isSingleEvent) {
+      xpos = ((event.start - this.start) / (this.stop - this.start)) * this.width;
+    } else {
+      xpos = ((event.time - this.start) / (this.stop - this.start)) * this.width;
+    }
 
     const xend = ((event.stop - this.start) / (this.stop - this.start)) * this.width;
     const width = xend - xpos;
@@ -126,14 +137,28 @@ class TimelineGenerator {
     let bar;
 
     // Base rectangle for the event
-    bar += `<rect
-    x="${xpos}"
-    y="${ypos}"
-    width="${width}"
-    height="${EVENT_BAR_HEIGHT}"
-    style="fill:${color};stroke-width:0;stroke:${EVENT_BAR_STROKE}"
-    />;
-    `;
+    if (isSingleEvent) {
+      const radius = 5;
+      bar += `
+       <circle
+       cx="${xpos}"
+       cy="${ypos}"
+       r="${radius}"
+       stroke="black"
+       stroke-width="0"
+       fill="${color}" />
+      `;
+
+    } else {
+      bar += `<rect
+      x="${xpos}"
+      y="${ypos}"
+      width="${width}"
+      height="${EVENT_BAR_HEIGHT}"
+      style="fill:${color};stroke-width:0;stroke:${EVENT_BAR_STROKE}"
+      />;
+      `;
+    }
 
     let startLabel = event.start;
     let stopLabel = event.stop;
@@ -146,17 +171,27 @@ class TimelineGenerator {
       stopLabel = event.stopLabel;
     }
 
-    bar += `
-       <text x="${xpos}" y="${ypos - 2}" class="eventlabel">${startLabel}</text>
-       <text x="${xpos + (width - 25)}" y="${ypos -
-      2}" class="eventlabel">${stopLabel}</text>
-    `;
 
-    if (event.label) {
+    if (isSingleEvent) {
+      let pointLabel = event.time;
+
+      if (event.label) {
+        pointLabel = event.label;
+      }
+
+      bar += `<text x="${xpos - (10)}" y="${ypos - 8}" class="eventlabel">${pointLabel}</text>`;
+    } else {
       bar += `
-       <text x="${xpos + width / 2 - event.label.length * 3}" y="${ypos +
-        13}" class="eventinsidelabel">${event.label}</text>
+         <text x="${xpos}" y="${ypos - 2}" class="eventlabel">${startLabel}</text>
+         <text x="${xpos + (width - 25)}" y="${ypos - 2}" class="eventlabel">${stopLabel}</text>
       `;
+
+      if (event.label) {
+        bar += `
+         <text x="${xpos + width / 2 - event.label.length * 3}" y="${ypos + 20}"
+         class="eventinsidelabel">${event.label}</text>
+        `;
+      }
     }
 
     return bar;
@@ -195,7 +230,7 @@ class TimelineGenerator {
 
       .eventinsidelabel {
         font: bold 10px helvetica;
-        fill: #fff;
+        fill: #636e72;
         letter-spacing: 1px;
       }
       </style>
@@ -214,12 +249,7 @@ class TimelineGenerator {
   }
 
   generate() {
-    // this.viewboxHeight = 200;
-
-    // if (this.events.length > 3) {
-      // this.viewboxHeight += 50;
-      this.viewboxHeight = EVENT_BAR_SECTION_SIZE * this.events.length;
-    // }
+    this.viewboxHeight = EVENT_BAR_SECTION_SIZE * this.events.length;
     this.viewboxHeight += 70;
 
     let graph = `<svg viewbox="0 0 500 ${this.viewboxHeight}">`;
